@@ -25,14 +25,22 @@ public class ConverterWebController {
         model.addAttribute("currentPage", "html-to-pdf");
         return "convert/html-to-pdf";
     }
+
+    @GetMapping("/html-to-pdf-form")
+    @Hidden
+    public String convertHTMLToPdfFormForm(Model model) {
+        model.addAttribute("currentPage", "html-to-pdf-form");
+        model.addAttribute("replaceRadioButtons", true);
+        return "convert/html-to-pdf-form";
+    }
+
     @GetMapping("/markdown-to-pdf")
     @Hidden
     public String convertMarkdownToPdfForm(Model model) {
         model.addAttribute("currentPage", "markdown-to-pdf");
         return "convert/markdown-to-pdf";
     }
-    
-    
+
     @GetMapping("/url-to-pdf")
     @Hidden
     public String convertURLToPdfForm(Model model) {

@@ -85,6 +85,7 @@
 				
 				<div th:replace="~{fragments/card :: card(id='url-to-pdf', cardTitle=#{home.URLToPDF.title}, cardText=#{home.URLToPDF.desc}, cardLink='url-to-pdf', svgPath='images/url.svg')}"></div>
 				<div th:replace="~{fragments/card :: card(id='html-to-pdf', cardTitle=#{home.HTMLToPDF.title}, cardText=#{home.HTMLToPDF.desc}, cardLink='html-to-pdf', svgPath='images/html.svg')}"></div>
+                <div th:replace="~{fragments/card :: card(id='html-to-pdf-form', cardTitle=#{home.HTMLToPDFForm.title}, cardText=#{home.HTMLToPDFForm.desc}, cardLink='html-to-pdf-form', svgPath='images/form.svg')}"></div>
                 <div th:replace="~{fragments/card :: card(id='markdown-to-pdf', cardTitle=#{home.MarkdownToPDF.title}, cardText=#{home.MarkdownToPDF.desc}, cardLink='markdown-to-pdf', svgPath='images/markdown.svg')}"></div>
                 <div th:replace="~{fragments/card :: card(id='get-info-on-pdf', cardTitle=#{home.getPdfInfo.title}, cardText=#{home.getPdfInfo.desc}, cardLink='get-info-on-pdf', svgPath='images/info.svg')}"></div>
                 <div th:replace="~{fragments/card :: card(id='extract-page', cardTitle=#{home.extractPage.title}, cardText=#{home.extractPage.desc}, cardLink='extract-page', svgPath='images/extract.svg')}"></div>

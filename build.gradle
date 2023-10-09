@@ -96,7 +96,9 @@ dependencies {
 	implementation 'org.commonmark:commonmark:0.21.0'
     // https://mvnrepository.com/artifact/com.github.vladimir-bukhtoyarov/bucket4j-core
 	implementation 'com.github.vladimir-bukhtoyarov:bucket4j-core:7.6.0'
-    
+	// used for parsing html in the html to pdf form
+    implementation group: 'org.jsoup', name: 'jsoup', version: '1.16.1'
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 	compileOnly 'org.projectlombok:lombok:1.18.28'
 	annotationProcessor 'org.projectlombok:lombok:1.18.28'
