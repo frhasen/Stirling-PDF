@@ -97,26 +97,25 @@ public class FileToPdf {
         }
     }
 
-    public static byte[] convertHtmlToFormPdf(byte[] fileBytes, String fileName, boolean replaceRadiobuttons) throws IOException, InterruptedException {
-        if (replaceRadiobuttons) {
-            String html = new String(fileBytes);
-            // parse html document
-            Document document =
-                    Jsoup.parse(html);
-            // find all radio buttons
-            Elements inputs = document.select("input[type='radio']");
-            int i = 0; // create a counter to distinguish the names of the radio buttons to make them selectable on by one
-            for (var input : inputs) {
-                // change type
-                input.attr("type", "checkbox");
-                // change name
-                String name = input.attr("name");
-                input.attr("name", String.format("%s-%d", name, i++));
-            }
-            // dom back to string
-            html = document.html();
-            fileBytes = html.getBytes();
+    public static byte[] convertHtmlToFormPdf(byte[] fileBytes, String fileName) throws IOException, InterruptedException {
+        String html = new String(fileBytes);
+        // parse html document
+        Document document =
+                Jsoup.parse(html);
+        // find all radio buttons
+        Elements inputs = document.select("input[type='radio']");
+        int i = 0; // create a counter to distinguish the names of the radio buttons to make them selectable on by one
+        for (var input : inputs) {
+            // change type
+            input.attr("type", "checkbox");
+            // change name
+            String name = input.attr("name");
+            input.addClass("radio-btn");
+            input.attr("name", String.format("%s-%d", name, i++));
         }
+        // dom back to string
+        html = document.html();
+        fileBytes = html.getBytes();
 
         Path tempOutputFile = Files.createTempFile("output_", ".pdf");
         Path tempInputFile = null;

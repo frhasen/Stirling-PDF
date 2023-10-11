@@ -15,11 +15,6 @@
                         <form method="post" enctype="multipart/form-data" th:action="@{api/v1/convert/html/pdf-form}">
                             <div th:replace="~{fragments/common :: fileSelector(name='fileInput', multiple=false)}"></div>
                             <br>
-                            <input type="checkbox" id="replaceRadioButtons" th:field="*{replaceRadioButtons}" th:value="${replaceRadioButtons}" name="replaceRadioButtons">
-                            <label th:text="#{HTMLToPDFForm.replaceRadioButtons}" for="replaceRadioButtons">
-                            </label>
-                            <br>
-                            <br>
                             <button type="submit" id="submitBtn" class="btn btn-primary" th:text="#{HTMLToPDFForm.submit}"></button>
 
                         </form>

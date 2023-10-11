@@ -1,5 +1,7 @@
 package stirling.software.SPDF.controller.api.converters;
 
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,8 +11,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import stirling.software.SPDF.model.api.GeneralFile;
 import stirling.software.SPDF.utils.FileToPdf;
 import stirling.software.SPDF.utils.WebResponseUtils;
-
-import java.util.Optional;
 
 @RestController
 @Tag(name = "Convert", description = "Convert APIs")
@@ -43,13 +43,13 @@ public class ConvertHtmlToPDF {
         return WebResponseUtils.bytesToWebResponse(pdfBytes, outputFilename);
     }
 
-    @PostMapping(consumes = "multipart/form-data", value = "/html/pdf-form")
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, value = "/html/pdf-form")
     @Operation(
             summary = "Convert an HTML or ZIP (containing HTML and CSS) to PDF using the --form-enable flag",
             description = "This endpoint takes an HTML or ZIP file input and converts it to a PDF format. Incl. forms and inputs"
     )
     public ResponseEntity<byte[]> HtmlToPdfForm(
-            @ModelAttribute GeneralFile request, @RequestParam Optional<Boolean> replaceRadioButtons)
+            @ModelAttribute GeneralFile request )
             throws Exception {
         MultipartFile fileInput = request.getFileInput();
 
@@ -61,7 +61,7 @@ public class ConvertHtmlToPDF {
         if (originalFilename == null || (!originalFilename.endsWith(".html") && !originalFilename.endsWith(".zip"))) {
             throw new IllegalArgumentException("File must be either .html or .zip format.");
         }
-        byte[] pdfBytes = FileToPdf.convertHtmlToFormPdf(fileInput.getBytes(), originalFilename, replaceRadioButtons.orElseGet(() -> true));
+        byte[] pdfBytes = FileToPdf.convertHtmlToFormPdf(fileInput.getBytes(), originalFilename);
 
         String outputFilename = originalFilename.replaceFirst("[.][^.]+$", "") + ".pdf";  // Remove file extension and append .pdf
 

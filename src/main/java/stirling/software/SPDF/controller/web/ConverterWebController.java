@@ -30,7 +30,6 @@ public class ConverterWebController {
     @Hidden
     public String convertHTMLToPdfFormForm(Model model) {
         model.addAttribute("currentPage", "html-to-pdf-form");
-        model.addAttribute("replaceRadioButtons", true);
         return "convert/html-to-pdf-form";
     }
 
