@@ -1,0 +1,16 @@
+---
+stages:
+  - build
+  - docker-build
+
+build-job:
+  stage: build
+  script:
+    - chmod 755 gradle
+    - ./gradlew build
+
+docker-build-job:
+  stage: docker-build
+  script:
+    - VERSION=$(./gradlew printVersion -q)
+    - IMAGE="balticfinance/stirling-pdf:$VERSION"
